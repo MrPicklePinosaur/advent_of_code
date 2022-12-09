@@ -73,6 +73,13 @@ cheat a bit and pass some node functions to wasm. However, I have limited
 myself to only i/o functions and not any other javascript utilities (like
 string manipulation functions).
 
+Ended up spending quite a bit of time stuck since I was using the
+`load` instruction which loaded 4 bytes instead of `load8_u` which
+loads a single byte to read characters from the input
+
+Resources
+- [WebAssembly OpCodes](https://pengowray.github.io/wasm-ops/)
+
 # Languages to use
 
 list of languages that I am considering on using for future problems
