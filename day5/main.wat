@@ -14,22 +14,27 @@
     (global $stackSize i32 (i32.const 128))
     (global $globalStackBase i32 (i32.const 65536))
     (global $fileContents i32 (i32.const 256))
+    (global $filePtr (mut i32) (i32.const 0))
 
     (func $main (param $stacks i32) (result i32)
 
     	(local $fileLength i32)
 	(local $i i32) ;; loop counter
 	(local $offset i32)
-	(local $rowOffset i32)
 	(local $char i32)
+
+	(local $moves i32)
+	(local $from i32)
+	(local $to i32)
 
 	(local.set $fileLength
 	    (call $readFileSync (i32.const 0) (i32.const 9) (global.get $fileContents))
 	)
 
-	(call $logString (global.get $fileContents) (i32.const 300))
+	;;(call $logString (global.get $fileContents) (i32.const 300))
+	(global.set $filePtr (global.get $fileContents))
 
-	;; parse input
+	;; parse initial configuration
 	(block $done
 	    (loop $rowLoop
 		(local.set $i (i32.const 0))
@@ -37,8 +42,8 @@
 		    ;; 4*i + 3 + fileContents
 		    (local.set $offset
 			(i32.add
-			    (i32.add (i32.add (i32.mul (i32.const 4) (local.get $i)) (i32.const 1)) (global.get $fileContents))
-			    (local.get $rowOffset)
+			    (i32.add (i32.mul (i32.const 4) (local.get $i)) (i32.const 1))
+			    (global.get $filePtr)
 			)
 		    )
 
@@ -51,28 +56,79 @@
 
 			    ;; push to respective stack
 			    (call $stackPush (local.get $i) (local.get $char))
-			    (call $logI32
-				(call $stackTop (local.get $i))
-			    )
+			    ;;(call $logI32 (call $stackTop (local.get $i)))
 			)
 		    )
 
 		    (local.set $i (i32.add (local.get $i) (i32.const 1)))
 		    (br_if $itemLoop (i32.lt_u (local.get $i) (local.get $stacks)))
 		)
-		(local.set $rowOffset
+		(global.set $filePtr
 		    (i32.add
-			(local.get $rowOffset)
+			(global.get $filePtr)
 			(i32.mul (local.get $stacks) (i32.const 4))
 		    )
 		)
-		(call $logString (i32.const 0) (i32.const 5))
+		;; (call $logString (i32.const 0) (i32.const 5))
 		(br $rowLoop)
 	    )
 	)
 
+	;; skip new line
+	(global.set $filePtr (i32.add (global.get $filePtr) (i32.mul (local.get $stacks) (i32.const 4))))
+	(global.set $filePtr (i32.add (global.get $filePtr) (i32.const 1)))
+
+	;; parse move instructions
+
+	(block $instLoopDone
+	    (loop $instLoop
+
+		;; line must start with 'm'
+		(if (i32.ne (i32.load8_u (global.get $filePtr)) (i32.const 109))
+		    (then (br $instLoopDone))
+		)
+
+		;; skip 'move '
+		(global.set $filePtr (i32.add (global.get $filePtr) (i32.const 5)))
+		(local.set $moves (call $parseInt))
+
+		;; skip ' from '
+		(global.set $filePtr (i32.add (global.get $filePtr) (i32.const 6)))
+		(local.set $from (call $parseInt))
+
+		;; skip ' to '
+		(global.set $filePtr (i32.add (global.get $filePtr) (i32.const 4)))
+		(local.set $to (call $parseInt))
+
+		;; skip newline
+		(global.set $filePtr (i32.add (global.get $filePtr) (i32.const 1)))
+		(br $instLoop)
+
+		(local.set $i (i32.const 0))
+		(loop $innerInstLoop
+
+		    (call $stackPush (local.get $to) (call $stackTop (local.get $from)))
+		    (call $stackPop (local.get $from))
+
+		    (local.set $i (i32.add (local.get $i) (i32.const 1)))
+		    (br_if $innerInstLoop (i32.lt_u (local.get $i) (local.get $moves)))
+		)
+
+	    )
+	)
+
+	(local.set $i (i32.const 0))
+	(loop $outputLoop
+
+	    (call $logI32 (call $stackTop (local.get $i)))
+	      
+	    (local.set $i (i32.add (local.get $i) (i32.const 1)))
+	    (br_if $outputLoop (i32.lt_u (local.get $i) (local.get $stacks)))
+	)
+
 	(i32.const 0)
     )
+
 
     (func $stackPush (param $stackNum i32) (param $value i32)
         (local $stackBase i32) ;; address of stack base
@@ -106,7 +162,7 @@
 	)
     )
 
-    (func $stackPop (param $stackNum i32) (param $value i32)
+    (func $stackPop (param $stackNum i32)
         (local $stackBase i32) ;; address of stack base
         (local $stackPtr i32) ;; value of the stack pointer
 
@@ -139,6 +195,33 @@
 	(local.set $stackPtr (i32.load8_u (local.get $stackBase)))
 
 	(i32.load8_u (i32.sub (local.get $stackBase) (local.get $stackPtr)))
+    )
+
+    ;; read until next non digit character
+    (func $parseInt (result i32)
+
+    	(local $char i32)
+	(local $ret i32)
+
+	;; (call $logString (global.get $filePtr) (i32.const 30))
+	(block $done
+	    (loop $loop
+		(local.set $char (i32.load8_u (global.get $filePtr)))
+		;; check if digit
+		(if (i32.and (i32.le_s (i32.const 48) (local.get $char)) (i32.le_s (local.get $char) (i32.const 57)))
+		    (then
+			(local.set $ret
+			    (i32.add (i32.mul (local.get $ret) (i32.const 10)) (i32.sub (local.get $char) (i32.const 48)))
+			)
+		    )
+		    (else (br $done))
+		)
+		(global.set $filePtr (i32.add (global.get $filePtr) (i32.const 1)))
+		(br $loop)
+	    )
+	)
+
+	(local.get $ret)
     )
     
 )

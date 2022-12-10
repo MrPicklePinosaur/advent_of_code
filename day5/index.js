@@ -13,11 +13,11 @@ const encode = (mem, offset, str) => {
 }
 
 // pass i/o handlers to wasm
-const block = new WebAssembly.Memory({initial: 1 });
+const block = new WebAssembly.Memory({initial: 512 });
 const imports = {
     console: {
 	string: (offset, len) => { process.stdout.write(decode(block, offset, len)+"\n") },
-	i32: (n) => { process.stdout.write(n+"\n") },
+	i32: (n) => { process.stdout.write(String.fromCharCode(n)) },
 	i32Decode: (ptr) => { process.stdout.write(decode(block, ptr, 1)+"\n") }
     },
     fs: {
