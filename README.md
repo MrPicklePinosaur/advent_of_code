@@ -22,7 +22,7 @@ of computation (c preprocessor or sed).
 - [x][x] [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) Raku
 - [ ][ ] [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) Sed
 - [x][x] [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) Smalltalk
-- [ ][ ] [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) WebAssembly
+- [x][x] [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) WebAssembly
 
 # Writeup
 
@@ -75,7 +75,11 @@ string manipulation functions).
 
 Ended up spending quite a bit of time stuck since I was using the
 `load` instruction which loaded 4 bytes instead of `load8_u` which
-loads a single byte to read characters from the input
+loads a single byte to read characters from the input.
+
+This question ended up being really time consuming (and tedious) since web
+assembly is such a low level language. Web assembly has much more modern syntax
+(s-expressions), so it is a bit more readable than something like x86 assembly.
 
 Resources
 - [WebAssembly OpCodes](https://pengowray.github.io/wasm-ops/)
@@ -85,7 +89,6 @@ Resources
 list of languages that I am considering on using for future problems
 - BASIC
 - vimscript
-- webassembly
 - tex
 - c preprocessor
 - sql
