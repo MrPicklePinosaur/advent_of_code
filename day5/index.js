@@ -17,8 +17,9 @@ const block = new WebAssembly.Memory({initial: 512 });
 const imports = {
     console: {
 	string: (offset, len) => { process.stdout.write(decode(block, offset, len)+"\n") },
-	i32: (n) => { process.stdout.write(String.fromCharCode(n)) },
-	i32Decode: (ptr) => { process.stdout.write(decode(block, ptr, 1)+"\n") }
+	i32: (n) => { process.stdout.write(n+"\n") },
+	i32Decode: (n) => { process.stdout.write(String.fromCharCode(n)) },
+	// i32Decode: (ptr) => { process.stdout.write(decode(block, ptr, 1)+"\n") }
     },
     fs: {
 	readFileSync: (offset, len, outOffset) => {
@@ -35,7 +36,7 @@ const imports = {
 const jsMain = async () => {
     const buffer = fs.readFileSync('main.wasm');
     WebAssembly.instantiate(buffer, imports).then(wasm => {
-	wasm.instance.exports.main(9);
+	wasm.instance.exports.main(9, 8);
     }).catch(e => console.log(e));
 }
 jsMain();
