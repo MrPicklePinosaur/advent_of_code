@@ -23,6 +23,8 @@ of computation (c preprocessor or sed).
 - [ ][ ] [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) Sed
 - [x][x] [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) Smalltalk
 - [x][x] [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) WebAssembly
+- [ ][ ] [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) C preprocessor
+- [ ][ ] [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) LaTex
 
 # Writeup
 
@@ -83,6 +85,19 @@ assembly is such a low level language. Web assembly has much more modern syntax
 
 Resources
 - [WebAssembly OpCodes](https://pengowray.github.io/wasm-ops/)
+
+## Day 6
+
+Resources
+- [C Preprocessor tricks, tips and idioms](https://github.com/pfultz2/Cloak/wiki/C-Preprocessor-tricks,-tips,-and-idioms)
+- [C/C++ Preprocessor Metaprogramming](http://saadahmad.ca/cc-preprocessor-metaprogramming-2/)
+
+## Day 7
+
+Resources
+- [Programming LaTeX3](https://www.texdev.net/2014/02/02/programming-latex3-a-summary-so-far/)
+- [LaTeX3: Programming in LaTeX with Ease](https://www.alanshawn.com/latex3-tutorial/)
+
 
 # Languages to use
 

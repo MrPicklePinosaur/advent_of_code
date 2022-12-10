@@ -1,0 +1,24 @@
+
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{expl3}
+
+\ExplSyntaxOn
+\begin{document}
+\cs_new:Npn \Hello #1
+    { \prg_replicate:nn {#1}{Hello~World} }
+
+\ior_open:Nn \g_tmpa_ior{test.txt}
+
+\int_set:Nn \l_tmpa_int {0}
+\int_do_while:nNnn{\l_tmpa_int} < {10} {
+    \ior_str_get:NN \g_tmpa_ior \l_tmpa_str
+    \par\l_tmpa_str
+    \int_incr:N {\l_tmpa_int}
+}
+
+\ior_close:N \g_tmpa_ior
+
+\end{document}
+
+\ExplSyntaxOff
