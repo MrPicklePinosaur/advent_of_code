@@ -1,0 +1,28 @@
+
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{expl3}
+
+\ExplSyntaxOn
+\begin{document}
+
+\ior_open:Nn \g_tmpa_ior{test.txt}
+\ior_str_get:NN \g_tmpa_ior \l_input_str
+\par \l_input_str
+
+\seq_new:N \l_chars_seq
+\seq_clear:N \l_chars_seq
+
+\str_map_inline:Nn \l_input_str {
+    \seq_put_left:Nn \l_chars_seq {#1}
+
+    \par \seq_item:Nn \l_chars_seq {1} \seq_item:Nn \l_chars_seq {2} \seq_item:Nn \l_chars_seq {3} \seq_item:Nn \l_chars_seq {4}
+
+    % check uniqueness
+}
+
+\ior_close:N \g_tmpa_ior
+
+\end{document}
+
+\ExplSyntaxOff
