@@ -23,8 +23,8 @@ of computation (c preprocessor or sed).
 - [ ][ ] [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) Sed
 - [x][x] [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) Smalltalk
 - [x][x] [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) WebAssembly
-- [ ][ ] [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) C preprocessor
-- [ ][ ] [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) LaTex
+- [ ][ ] [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) Latex
+- [ ][ ] [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7)
 
 # Writeup
 
@@ -88,15 +88,31 @@ Resources
 
 ## Day 6
 
-Resources
-- [C Preprocessor tricks, tips and idioms](https://github.com/pfultz2/Cloak/wiki/C-Preprocessor-tricks,-tips,-and-idioms)
-- [C/C++ Preprocessor Metaprogramming](http://saadahmad.ca/cc-preprocessor-metaprogramming-2/)
+This exercise has given me a buring hate for latex :P.
 
-## Day 7
+Apparently LaTeX's programming ecosystem was so ugly and messed up it required
+the formulation of a so called LaTeX3 that attemps to unify the syntax.
+Admittedly it is much better but it is still very frustrating to program in.
+The syntax is clunky and verbose, and most of all debugging errors are very
+very frustrating. This is since running the program is equivalent to compiling
+a pdf. There are also a whole bunch of weird behaviors like variable scoping
+and how parameters are passed to functions that took me a bit to figure out.
+
+I salute those that are actually able to write packages for LaTex since for me
+doing such a simple task was already enough to end me.
+
+Currently on hold since I can't get LaTex to read file character by character,
+I suspect it's dying trying to read such a long line in.
 
 Resources
 - [Programming LaTeX3](https://www.texdev.net/2014/02/02/programming-latex3-a-summary-so-far/)
 - [LaTeX3: Programming in LaTeX with Ease](https://www.alanshawn.com/latex3-tutorial/)
+
+## Day 7
+
+<!-- Resources -->
+<!-- - [C Preprocessor tricks, tips and idioms](https://github.com/pfultz2/Cloak/wiki/C-Preprocessor-tricks,-tips,-and-idioms) -->
+<!-- - [C/C++ Preprocessor Metaprogramming](http://saadahmad.ca/cc-preprocessor-metaprogramming-2/) -->
 
 
 # Languages to use
