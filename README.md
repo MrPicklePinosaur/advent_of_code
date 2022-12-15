@@ -24,7 +24,7 @@ of computation (c preprocessor or sed).
 - [x][x] [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) Smalltalk
 - [x][x] [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) WebAssembly
 - [ ][ ] [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) Latex
-- [ ][ ] [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7)
+- [ ][ ] [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) Vimscript
 
 # Writeup
 
@@ -110,10 +110,11 @@ Resources
 
 ## Day 7
 
-<!-- Resources -->
-<!-- - [C Preprocessor tricks, tips and idioms](https://github.com/pfultz2/Cloak/wiki/C-Preprocessor-tricks,-tips,-and-idioms) -->
-<!-- - [C/C++ Preprocessor Metaprogramming](http://saadahmad.ca/cc-preprocessor-metaprogramming-2/) -->
+After the LaTeX 'adventure', I'm pretty glad to have a (semi) sensible
+programming language to work with again.
 
+Resources
+- [Learn Vimscript in Y Minutes](https://learnxinyminutes.com/docs/vimscript/)
 
 # Languages to use
 
