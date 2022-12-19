@@ -24,7 +24,8 @@ of computation (c preprocessor or sed).
 - [x][x] [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) Smalltalk
 - [x][x] [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) WebAssembly
 - [ ][ ] [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) Latex
-- [ ][ ] [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) Vimscript
+- [x][x] [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) Vimscript
+- [ ][ ] [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) OCaml
 
 # Writeup
 
@@ -115,6 +116,7 @@ programming language to work with again.
 
 Resources
 - [Learn Vimscript in Y Minutes](https://learnxinyminutes.com/docs/vimscript/)
+- [Learn Vim the Smart Way](https://learnvim.irian.to/)
 
 # Languages to use
 
