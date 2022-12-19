@@ -47,5 +47,26 @@ while b:file_it < len(b:file)
 
 endwhile
 
-" echo b:dirs['/']
+
+let b:answer = 0
+" recursively compute total directory sizes
+function! DirSize(dir_name)
+    let l:dir_data = b:dirs[a:dir_name]
+    let l:total_size = l:dir_data['file_sizes']
+
+    " recurse
+    for next_dir in l:dir_data['dirs']
+        let l:total_size += DirSize(a:dir_name .. next_dir .. '/')
+    endfor
+
+    if l:total_size <= 100000
+        let b:answer += l:total_size
+    endif
+
+    return l:total_size
+endfunction
+
+call DirSize('/')
+
+echo b:answer
 
